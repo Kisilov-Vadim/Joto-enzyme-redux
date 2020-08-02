@@ -1,8 +1,16 @@
 import React from 'react';
+import './App.scss';
+
+import GuessedWords from './components/GuessedWords/GuessedWords';
+import Congrats from './components/Congrats/Congrats';
 
 function App() {
   return (
-    <h1>Joto Enzyme Redux!</h1>
+    <div className="App container">
+      <h1>Joto</h1>
+      <Congrats success={false} />
+      <GuessedWords guessedWords={[{guessedWord: 'train', letterMatchCount: 3}]} />
+    </div>
   );
 }
 
