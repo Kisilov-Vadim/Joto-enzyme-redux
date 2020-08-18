@@ -38,7 +38,7 @@ describe('render', () => {
     let wrapper;
     beforeEach(() => {
       const initialState = { success: true };
-      wrapper = setup(initialState);
+      wrapper = setup(initialState).dive();
     })
 
     test('renders component without error', () => {
