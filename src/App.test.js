@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import App from './App';
+import App, { UnconnectedApp } from './App';
 import { storeFactory } from '../test/testUtils';
 
 
@@ -37,5 +37,24 @@ describe('redux properties', () => {
     const wrapper = setup(); 
     const prop = wrapper.props().getSecretWord; 
     expect(prop).toBeInstanceOf(Function);
+  })
+
+  test('getSecretWord runs on App mount', () => {
+    const getSecretWordMock = jest.fn();
+    const props = {
+      getSecretWord: getSecretWordMock,
+      success: false,
+      guessedWords: []
+    }  
+  
+    const wrapper = shallow(<UnconnectedApp {...props} />);
+    
+    //run lifcicle methoc
+    wrapper.instance().componentDidMount();
+
+    //check to see if mock ran
+    const getSecretWordCallCount = getSecretWordMock.mock.calls.length; 
+
+    expect(getSecretWordCallCount).toBe(1);
   })
 })
