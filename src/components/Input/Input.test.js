@@ -6,7 +6,7 @@ import Input from '../Input/Input';
 
 const setup = (initialState={}) => {
   const store = storeFactory(initialState);
-  const wrapper = shallow(<Input store={store} />).dive().dive();
+  const wrapper = shallow(<Input store={store} />).dive();
   return wrapper;
 };
 
@@ -15,7 +15,7 @@ describe('render', () => {
     let wrapper;
     beforeEach(() => {
       const initialState = { success: false };
-      wrapper = setup(initialState);
+      wrapper = setup(initialState).dive();
     })
 
     test('renders component without error', () => {
@@ -58,8 +58,16 @@ describe('render', () => {
   })
 }); 
 
-describe('update state', () => {
-  test('', () => {
-
+describe('redux props', () => {
+  test('has success piece of state as prop', () => {
+    const success = true;
+    const wrapper = setup({ success });
+    const successProp = wrapper.props().success;
+    expect(successProp).toBe(true);
   });
+  test('guessWord action creator is a function prop', () => {
+    const wrapper = setup();
+    const guessWordProp = wrapper.props().guessWord; 
+    expect(guessWordProp).toBeInstanceOf(Function);
+  })
 })

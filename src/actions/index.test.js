@@ -23,8 +23,8 @@ describe('get secretword action creator', () => {
         response: secretWord,
       })
     });
-
-    return store.dispatch(getSecretWord())
+    
+    store.dispatch(getSecretWord())
       .then(() => {
         const newState = store.getState();
         expect(newState.secretWord).toBe(secretWord);
