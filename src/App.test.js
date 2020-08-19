@@ -49,12 +49,11 @@ describe('redux properties', () => {
   
     const wrapper = shallow(<UnconnectedApp {...props} />);
     
-    //run lifcicle methoc
+    //run lifcicle method
     wrapper.instance().componentDidMount();
 
     //check to see if mock ran
-    const getSecretWordCallCount = getSecretWordMock.mock.calls.length; 
-
+    const getSecretWordCallCount = getSecretWordMock.mock.calls.length;
     expect(getSecretWordCallCount).toBe(1);
   })
 })
