@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { getSecretWord } from './actions/index';
 import './App.scss';
@@ -14,11 +14,12 @@ export class UnconnectedApp extends React.Component {
   }
 
   render() {
-    const {success, guessedWords} = this.props;
+    const {success, secretWord, guessedWords} = this.props;
 
     return (
       <div className="App container">
         <h1>Joto</h1>
+        <div>The secret word is { secretWord } </div>
         <Congrats success={success} />
         <Input success={success} />
         <GuessedWords guessedWords={guessedWords} />
