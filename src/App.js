@@ -5,6 +5,7 @@ import './App.scss';
 import Congrats from './components/Congrats/Congrats';
 import GuessedWords from './components/GuessedWords/GuessedWords';
 import Input from './components/Input/Input';
+import RestartButton from './components/RestartButton/RestartButton';
 
 export class UnconnectedApp extends React.Component {
 
@@ -22,6 +23,7 @@ export class UnconnectedApp extends React.Component {
         <div>The secret word is { secretWord } </div>
         <Congrats success={success} />
         <Input success={success} />
+        <RestartButton />
         <GuessedWords guessedWords={guessedWords} />
       </div>
     );

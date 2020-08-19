@@ -4,6 +4,7 @@ import axios from 'axios';
 export const actionTypes = {
   CORRECT_GUESS: 'CORRECT_GUESS',
   GUESS_WORD: 'GUESS_WORD',
+  CLEAR_GUESS_WORDS: 'CLEAR_GUESS_WORDS',
   SET_SECRET_WORD: 'SET_SECRET_WORD'
 }
 
@@ -20,7 +21,8 @@ export const guessWord = (guessedWord) => {
   
     if (guessedWord === secretWord) {
       dispatch({
-        type: actionTypes.CORRECT_GUESS
+        type: actionTypes.CORRECT_GUESS,
+        payload: true
       })
     }
   }
@@ -28,16 +30,29 @@ export const guessWord = (guessedWord) => {
 
 export const getSecretWord = () => {
   return (dispatch) => {
-    dispatch({
-      type: actionTypes.SET_SECRET_WORD,
-      payload: 'olive'
-    })
-    return axios.get('localhost:3000')
-      .then(res => {
+    return axios.get('https://api.datamuse.com/words?ml=ringing+in+the+ears')
+      .then(({data}) => {
+        let randomNum = Math.floor(Math.random() * (data.length - 0)) + 0; 
+        console.log(data[randomNum].word)
         dispatch({
           type: actionTypes.SET_SECRET_WORD,
-          payload: 'olive'
+          payload: data[randomNum].word
         })
       });
+  }
+}
+
+export const restartGame = () => {
+  return (dispatch) => {
+    dispatch(getSecretWord());
+
+    dispatch({
+      type: actionTypes.CLEAR_GUESS_WORDS
+    });
+
+    dispatch({
+      type: actionTypes.CORRECT_GUESS,
+      payload: false
+    });
   }
 }
