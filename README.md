@@ -6,5 +6,13 @@ In this project, I am learning how to write unit tests with Jest Enzyme.
 2) 
   - npm i -D babel-plugin-react-remove-properties
   - npm run eject
-  - go to npm babel-plugin-react github and add configuration in package.json
+  - add configuration in package.json (
+    "env": {
+      "production": {
+        "plugins": [
+          ["react-remove-properties", {"properties": ["data-test", "data-foo"]}]
+        ]
+      }
+    },
+  )
   - npm run build
